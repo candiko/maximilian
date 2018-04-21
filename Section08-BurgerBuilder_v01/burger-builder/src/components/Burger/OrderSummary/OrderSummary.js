@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Auxi from "../../../hoc/Auxi";
+import Button from "../../UI/Button/Button";
 
 const orderSummary = props => {
   const ingredientSummary = Object.keys(props.ingredients).map(igKey => {
@@ -17,13 +18,24 @@ const orderSummary = props => {
       <h3>Your Order</h3>
       <p>A delicious burger with the following ingredients:</p>
       <ul>{ingredientSummary}</ul>
+      <p>
+        <strong>Total Price: ${props.price.toFixed(2)}</strong>
+      </p>
       <p>Continue to checkout?</p>
+      <Button clickButton={props.closeModal} buttonType={"Danger"}>
+        CANCEL
+      </Button>
+      <Button clickButton={props.closeModal} buttonType={"Success"}>
+        CONTINUE
+      </Button>
     </Auxi>
   );
 };
 
 orderSummary.propTypes = {
-  ingredients: PropTypes.object.isRequired
+  ingredients: PropTypes.object.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  price: PropTypes.number.isRequired
 };
 
 export default orderSummary;

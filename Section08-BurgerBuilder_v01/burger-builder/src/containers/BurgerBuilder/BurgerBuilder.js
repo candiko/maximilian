@@ -88,6 +88,10 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: true });
   };
 
+  closeModalHandler = () => {
+    this.setState({ purchasing: false });
+  };
+
   render() {
     // Iterate through for whether less button disabled or not
     const disabledInfo = {
@@ -100,8 +104,12 @@ class BurgerBuilder extends Component {
 
     return (
       <Auxi>
-        <Modal show={this.state.purchasing}>
-          <OrderSummary ingredients={this.state.ingredients} />
+        <Modal show={this.state.purchasing} closeModal={this.closeModalHandler}>
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            closeModal={this.closeModalHandler}
+            price={this.state.totalPrice}
+          />
         </Modal>
 
         <Burger ingredients={this.state.ingredients} />
