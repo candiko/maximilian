@@ -25,7 +25,7 @@ const orderSummary = props => {
       <Button clickButton={props.closeModal} buttonType={"Danger"}>
         CANCEL
       </Button>
-      <Button clickButton={props.closeModal} buttonType={"Success"}>
+      <Button clickButton={props.toCheckout} buttonType={"Success"}>
         CONTINUE
       </Button>
     </Auxi>
@@ -35,6 +35,7 @@ const orderSummary = props => {
 orderSummary.propTypes = {
   ingredients: PropTypes.object.isRequired,
   closeModal: PropTypes.func.isRequired,
+  toCheckout: PropTypes.func.isRequired,
   price: PropTypes.number.isRequired
 };
 

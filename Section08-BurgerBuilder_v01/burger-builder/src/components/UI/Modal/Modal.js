@@ -6,7 +6,7 @@ import classes from "./Modal.css";
 
 const modal = props => (
   <Auxi>
-    <Backdrop show={props.show} closeModal={props.closeModal} />
+    <Backdrop show={props.show} clicked={props.closeModal} />
     <div
       className={classes.Modal}
       style={{

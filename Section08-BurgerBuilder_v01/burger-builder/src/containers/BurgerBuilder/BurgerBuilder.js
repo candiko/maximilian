@@ -92,6 +92,10 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: false });
   };
 
+  toCheckoutHandler = () => {
+    alert("You will be directed to checkout page...");
+  };
+
   render() {
     // Iterate through for whether less button disabled or not
     const disabledInfo = {
@@ -108,6 +112,7 @@ class BurgerBuilder extends Component {
           <OrderSummary
             ingredients={this.state.ingredients}
             closeModal={this.closeModalHandler}
+            toCheckout={this.toCheckoutHandler}
             price={this.state.totalPrice}
           />
         </Modal>

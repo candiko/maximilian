@@ -13,7 +13,12 @@ const burger = props => {
     .reduce((arr, el) => arr.concat(el), []);
 
   if (ingredients.length === 0) {
-    ingredients = <p>Please add ingredients to MAKE THE BURGER GREAT AGAIN!</p>;
+    ingredients = (
+      <div>
+        <p>Please add ingredients to</p>
+        <p>MAKE THE BURGER GREAT AGAIN!</p>
+      </div>
+    );
   }
 
   return (
