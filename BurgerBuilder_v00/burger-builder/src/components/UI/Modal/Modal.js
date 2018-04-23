@@ -6,7 +6,10 @@ import classes from "./Modal.css";
 
 class Modal extends Component {
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.show !== this.props.show;
+    return (
+      nextProps.show !== this.props.show ||
+      nextProps.children !== this.props.children
+    );
   }
 
   render() {
@@ -28,8 +31,8 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
-  show: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired
+  show: PropTypes.bool,
+  closeModal: PropTypes.func
 };
 
 export default Modal;

@@ -8,8 +8,8 @@ const backdrop = props =>
   ) : null;
 
 backdrop.propTypes = {
-  show: PropTypes.bool.isRequired,
-  clicked: PropTypes.func.isRequired
+  show: PropTypes.bool,
+  clicked: PropTypes.func
 };
 
 export default backdrop;
