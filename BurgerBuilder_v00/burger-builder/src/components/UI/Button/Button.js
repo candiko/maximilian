@@ -14,7 +14,7 @@ const button = props => (
 button.propTypes = {
   clickButton: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired,
-  buttonType: PropTypes.string
+  buttonType: PropTypes.string.isRequired
 };
 
 export default button;
