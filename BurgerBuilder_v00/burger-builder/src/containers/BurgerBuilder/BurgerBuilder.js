@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import axios from "../../axios-orders";
 import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions";
+import * as actions from "../../store/actions/index";
+import axios from "../../axios-orders";
 
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Auxi from "../../hoc/Auxi/Auxi";
@@ -15,21 +15,11 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 class BurgerBuilder extends Component {
   // STATE
   state = {
-    purchasing: false,
-    loading: false,
-    error: false
+    purchasing: false
   };
 
-  // LIFE-CYCLE METHODS
   componentDidMount() {
-    // axios
-    //   .get("/ingredients.json")
-    //   .then(response => {
-    //     this.setState({ ingredients: response.data });
-    //   })
-    //   .catch(error => {
-    //     this.setState({ error: true });
-    //   });
+    this.props.onInitIngredient();
   }
 
   updatePurchaseState() {
@@ -57,6 +47,7 @@ class BurgerBuilder extends Component {
   };
 
   toCheckoutHandler = () => {
+    this.props.onInitPurchase();
     this.props.history.push("/checkout");
   };
 
@@ -73,7 +64,7 @@ class BurgerBuilder extends Component {
 
     // Spinner while fetching/posting data
     let orderSummary = null;
-    let burger = this.state.error ? (
+    let burger = this.props.error ? (
       <p>Ingredients can not be loaded.</p>
     ) : (
       <Spinner />
@@ -107,11 +98,6 @@ class BurgerBuilder extends Component {
       );
     }
 
-    // Check for order is submitting
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
-    }
-
     // RETURN JSX
     return (
       <Auxi>
@@ -126,17 +112,18 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    ings: state.ingredients,
-    totalPrice: state.totalPrice
+    ings: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+    error: state.burgerBuilder.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onIngredientAdded: ingName =>
-      dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ingName }),
-    onIngredientRemoved: ingName =>
-      dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName })
+    onIngredientAdded: ingName => dispatch(actions.addIngredient(ingName)),
+    onIngredientRemoved: ingName => dispatch(actions.removeIngredient(ingName)),
+    onInitIngredient: () => dispatch(actions.initIngredient()),
+    onInitPurchase: () => dispatch(actions.purchaseInit())
   };
 };
 
